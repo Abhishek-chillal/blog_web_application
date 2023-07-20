@@ -44,7 +44,7 @@ if (isset($_POST['submit'])) {
 
         if (in_array($extension, $allowed_files)) {
             //make sure image is not too large (2mb+)
-            if ($thumbnail['size'] < 2000000) {
+            if ($thumbnail['size'] <= 2000000) {
                 //upload avatar
                 move_uploaded_file($thumbnail_tmp_name, $thumbnail_destination_path);
             } else {

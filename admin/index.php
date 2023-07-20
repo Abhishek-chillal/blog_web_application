@@ -7,6 +7,8 @@ $query = "SELECT id, title, category_id FROM posts WHERE author_id=$current_user
 $posts = mysqli_query($connection, $query);
 
 ?>
+
+
 <section class="dashboard">
     <?php if (isset($_SESSION['add-post-success'])) : //show if add post was successful
     ?>
@@ -17,6 +19,43 @@ $posts = mysqli_query($connection, $query);
                 ?>
             </p>
         </div>
+    <?php elseif (isset($_SESSION['edit-post-success'])) : //show if add post was successful
+    ?>
+        <div class="alert__message success container">
+            <p>
+                <?= $_SESSION['edit-post-success'];
+                unset($_SESSION['edit-post-success']);
+                ?>
+            </p>
+        </div>
+    <?php elseif (isset($_SESSION['edit-post'])) : //show if add post was Not successful
+    ?>
+        <div class="alert__message error container">
+            <p>
+                <?= $_SESSION['edit-post'];
+                unset($_SESSION['edit-post']);
+                ?>
+            </p>
+        </div>
+    <?php elseif (isset($_SESSION['delete-post-success'])) : //show if add post was successful
+    ?>
+        <div class="alert__message success container">
+            <p>
+                <?= $_SESSION['delete-post-success'];
+                unset($_SESSION['delete-post-success']);
+                ?>
+            </p>
+        </div>
+    <?php elseif (isset($_SESSION['delete-post'])) : //show if add post was NOT successful
+    ?>
+        <div class="alert__message error container">
+            <p>
+                <?= $_SESSION['delete-post'];
+                unset($_SESSION['delete-post']);
+                ?>
+            </p>
+        </div>
+
     <?php endif ?>
     <div class="dashboard dashboard__container">
         <button id="show__sidebar-btn" class="sidebar__toggle"><i class="uil uil-angle-right-b"></i></button>

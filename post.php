@@ -1,33 +1,44 @@
 <?php
 include 'partials/header.php';
+
+//fetch post from database if id is set
+if (isset($_GET['id'])) {
+    $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+    $query = "SELECT * FROM posts WHERE id = $id";
+    $result = mysqli_query($connection, $query);
+    $post = mysqli_fetch_assoc($result);
+} else {
+    header('location: ' . ROOT_URL . 'blog.php');
+    die();
+}
+
 ?>
+
+
 <section class="singlepost">
     <div class="container singlepost__container">
-        <h2>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eius sunt laborum consequatur</h2>
-    </div>
-    <div class="post__author">
-        <div class="post__author-avatar">
-            <img src="./images/profile1.jpg" alt="">
-        </div>
-        <div class="post__author-info">
-            <h5>By: John Doe</h5>
-            <small>June 10,2022 - 12:03</small>
+        <h2><?= $post['title'] ?></h2>
+
+        <div class="post__author">
+            <?php
+            //fetch author from users using author id
+            $author_id = $post['author_id'];
+            $author_query = "SELECT * FROM users WHERE id = $author_id";
+            $author_result = mysqli_query($connection, $author_query);
+            $author = mysqli_fetch_assoc($author_result);
+            ?>
+            <div class="post__author-avatar">
+                <img src="./images/<?= $author['avatar'] ?>" alt="">
+            </div>
+            <div class="post__author-info">
+                <h5>By: <?= "{$author['firstname']} {$author['lastname']}" ?></h5>
+                <small><?= date("M d, Y- H:i", strtotime($post['date_time'])) ?></small>
+            </div>
         </div>
         <div class="singlepost__thumbnail">
-            <img src="" alt="">
+            <img src="./images/<?= $post['thumbnail'] ?>" alt="">
         </div>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas, est modi dolorum pariatur odit earum maiores quisquam cumque architecto aspernatur iure adipisci iusto harum consectetur facere explicabo debitis corporis ab inventore eligendi repudiandae vel! Ad eius reiciendis voluptas quia consequuntur.
-        </p>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas, est modi dolorum pariatur odit earum maiores quisquam cumque architecto aspernatur iure adipisci iusto harum consectetur facere explicabo debitis corporis ab inventore eligendi repudiandae vel! Ad eius reiciendis voluptas quia consequuntur.
-        </p>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas, est modi dolorum pariatur odit earum maiores quisquam cumque architecto aspernatur iure adipisci iusto harum consectetur facere explicabo debitis corporis ab inventore eligendi repudiandae vel! Ad eius reiciendis voluptas quia consequuntur.
-        </p>
-        <p>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas, est modi dolorum pariatur odit earum maiores quisquam cumque architecto aspernatur iure adipisci iusto harum consectetur facere explicabo debitis corporis ab inventore eligendi repudiandae vel! Ad eius reiciendis voluptas quia consequuntur.
-        </p>
+        <p><?= $post['body'] ?></p>
     </div>
 </section>
 <!-- end of single post-->
