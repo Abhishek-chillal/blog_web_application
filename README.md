@@ -40,9 +40,6 @@ The blog web application is built using the following technologies:
 - HTML, CSS, JavaScript: Front-end technologies for creating an intuitive and responsive user interface.
 - XAMPP: Local development environment that bundles Apache, MySQL, and PHP for easy setup.
 
-## Contributing
-
-If you welcome contributions to your project, explain how others can contribute. For example, you can include a guide on how to submit pull requests.
 
 ## License
 
