@@ -1,6 +1,6 @@
 # Blog Web Application
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md)
 
 ## Description
 
@@ -49,6 +49,6 @@ If you welcome contributions to your project, explain how others can contribute.
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
 
-MIT License © [Abhishek Chillal]
+MIT License © Abhishek Chillal
 
 
